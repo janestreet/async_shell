@@ -25,9 +25,6 @@ module Process : sig
   val format_failed : result -> string
 end
 
-(* CR dhouse: any client code that wants to take advantage of these type equivalences
-   (which is necessary to use this module) must depend on Core_extended. I think we should
-   fix this by adding OCAML_INTERFACES = core_extended into Async_extended's OMakefile. *)
 type 'a with_process_flags = 'a Core_extended.Shell.with_process_flags
 type 'a with_run_flags     = 'a Core_extended.Shell.with_run_flags
 type 'a with_test_flags    = 'a Core_extended.Shell.with_test_flags
