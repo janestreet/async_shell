@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: 48069922ddc7e9f03864d6c6f5418f7b)
+version = "109.17.00"
+description = "Shell helpers for Async"
+requires = "async core_extended threads"
+archive(byte) = "async_shell.cma"
+archive(byte, plugin) = "async_shell.cma"
+archive(native) = "async_shell.cmxa"
+archive(native, plugin) = "async_shell.cmxs"
+exists_if = "async_shell.cma"
+# OASIS_STOP
+
