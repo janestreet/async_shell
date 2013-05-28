@@ -26,3 +26,11 @@ Library async_shell
   XMETARequires:      async,
                       core_extended,
                       threads
+
+Document "async_shell"
+  Title:                Shell helpers for Async
+  Type:                 ocamlbuild (0.3)
+  BuildTools+:          ocamldoc
+  XOCamlbuildPath:      lib
+  XOCamlbuildLibraries: async_shell
+
