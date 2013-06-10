@@ -31,7 +31,7 @@ let read_stream =
             Tail.extend tail (rev_concat (x::xs));
             loop [] (Stream.Cons (x', rest))
           | None ->
-            Stream.next (Stream.of_raw rest) >>> loop (x::xs)
+            Stream.next rest >>> loop (x::xs)
       in
       Stream.next parts >>> loop [])
   in
