@@ -1,6 +1,6 @@
 # OASIS_START
-# DO NOT EDIT (digest: 1f771d2f6a2f843ee05bdeeb22f443a0)
-version = "109.28.01"
+# DO NOT EDIT (digest: 9b4039de18c464a6576d038164c02c20)
+version = "109.28.02"
 description = "Shell helpers for Async"
 requires = "async core_extended threads"
 archive(byte) = "async_shell.cma"
