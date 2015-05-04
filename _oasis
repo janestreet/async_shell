@@ -16,7 +16,7 @@ XStdFilesREADME:  false
 BuildTools:       ocamlbuild, camlp4o
 
 Library async_shell
-  Path:               lib
+  Path:               src
   FindlibName:        async_shell
   Modules:            Async_shell
   BuildDepends:       async,
