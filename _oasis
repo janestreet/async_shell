@@ -5,7 +5,7 @@ Name:             async_shell
 Version:          109.28.00
 Synopsis:         Shell helpers for Async
 Authors:          Jane Street Group, LLC <opensource@janestreet.com>
-Copyrights:       (C) 2013 Jane Street Group, LLC <opensource@janestreet.com>
+Copyrights:       (C) 2013 Jane Street Group LLC <opensource@janestreet.com>
 Maintainers:      Jane Street Group, LLC <opensource@janestreet.com>
 License:          Apache-2.0
 LicenseFile:      LICENSE.txt
