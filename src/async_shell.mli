@@ -49,6 +49,7 @@ val sh_lines   : ('a, string list   Deferred.t) sh_cmd with_run_flags
 val sh_one     : ('a, string option Deferred.t) sh_cmd with_run_flags
 val sh_one_exn : ('a, string        Deferred.t) sh_cmd with_run_flags
 val sh_full    : ('a, string        Deferred.t) sh_cmd with_run_flags
+val sh_full_and_error : ('a, (string * string) Deferred.t) sh_cmd with_run_flags
 val sh_lines_stream : ('a, string Stream.t)     sh_cmd with_run_flags
 
 val ssh         : ('a, unit          Deferred.t) sh_cmd with_run_flags with_ssh_flags

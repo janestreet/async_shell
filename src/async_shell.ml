@@ -78,6 +78,7 @@ let sh_one   ?expect = sh_gen (Process.head ()) ?expect
 let sh_one_exn   ?expect = sh_gen (Process.head_exn ()) ?expect
 let sh_lines ?expect = sh_gen (Process.lines ()) ?expect
 let sh_full  ?expect = sh_gen Process.content ?expect
+let sh_full_and_error ?expect = sh_gen Process.content_and_stderr ?expect
 
 let sh_lines_stream ?expect =
   Process.run_k (k_shell_command read_stream) ?expect
