@@ -1,0 +1,9 @@
+(library (
+  (name async_shell) (wrapped false)
+  (public_name async_shell)
+  (libraries (
+    async
+    core
+    core_extended
+  ))
+))
