@@ -2,8 +2,7 @@ open! Core.Std
 open Core_extended.Std
 open! Async.Std
 (** The functions in here are straightforward in_thread wrappers of
-    core_extended.Shell functions.
-*)
+    core_extended.Shell functions. *)
 
 module Process : sig
   type t = Core_extended.Shell.Process.t

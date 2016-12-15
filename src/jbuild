@@ -1,5 +1,5 @@
 (library (
-  (name async_shell) (wrapped false)
+  (name async_shell)
   (public_name async_shell)
   (libraries (
     async
