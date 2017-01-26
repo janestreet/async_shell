@@ -1,4 +1,4 @@
-open! Core.Std
+open! Core
 open Core_extended.Std
 open! Async.Std
 (** The functions in here are straightforward in_thread wrappers of
