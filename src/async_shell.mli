@@ -1,6 +1,6 @@
 open! Core
 open Core_extended.Std
-open! Async.Std
+open! Async
 (** The functions in here are straightforward in_thread wrappers of
     core_extended.Shell functions. *)
 
