@@ -1,6 +1,7 @@
 (library (
   (name async_shell)
   (public_name async_shell)
+  (flags (:standard -unsafe-string))
   (libraries (
     async
     core
