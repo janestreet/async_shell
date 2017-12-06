@@ -51,12 +51,16 @@ let run_gen reader =
   Process.run_k (fun f prog args ->
     In_thread.run (fun () -> f (Process.cmd prog args) reader))
 
-let run            = run_gen Process.discard
-let run_lines ?eol = run_gen (Process.lines ?eol ())
-let run_full       = run_gen Process.content
-let run_full_and_error = run_gen Process.content_and_stderr
-let run_one     ?eol = run_gen (Process.head ?eol ())
-let run_one_exn ?eol = run_gen (Process.head_exn ?eol ())
+let run                     = run_gen  Process.discard
+let run_lines ?eol          = run_gen (Process.lines        ?eol ())
+let run_full                = run_gen  Process.content
+let run_full_and_error      = run_gen  Process.content_and_stderr
+let run_one_line ?eol       = run_gen (Process.one_line     ?eol ())
+let run_one_line_exn ?eol   = run_gen (Process.one_line_exn ?eol ())
+let run_first_line ?eol     = run_gen (Process.head         ?eol ())
+let run_first_line_exn ?eol = run_gen (Process.head_exn     ?eol ())
+let run_one ?eol            = run_gen (Process.head         ?eol ())
+let run_one_exn ?eol        = run_gen (Process.head_exn     ?eol ())
 
 let run_lines_stream =
   Process.run_k (fun f prog args ->
@@ -73,12 +77,16 @@ let sh_gen reader =
   Process.run_k (k_shell_command (fun f cmd ->
     In_thread.run (fun () -> f cmd reader)))
 
-let sh       ?expect = sh_gen Process.discard ?expect
-let sh_one   ?expect = sh_gen (Process.head ()) ?expect
-let sh_one_exn   ?expect = sh_gen (Process.head_exn ()) ?expect
-let sh_lines ?expect = sh_gen (Process.lines ()) ?expect
-let sh_full  ?expect = sh_gen Process.content ?expect
-let sh_full_and_error ?expect = sh_gen Process.content_and_stderr ?expect
+let sh                ?expect = sh_gen  Process.discard            ?expect
+let sh_one            ?expect = sh_gen (Process.head ())           ?expect
+let sh_one_exn        ?expect = sh_gen (Process.head_exn ())       ?expect
+let sh_first_line     ?expect = sh_gen (Process.head ())           ?expect
+let sh_first_line_exn ?expect = sh_gen (Process.head_exn ())       ?expect
+let sh_one_line       ?expect = sh_gen (Process.one_line ())       ?expect
+let sh_one_line_exn   ?expect = sh_gen (Process.one_line_exn ())   ?expect
+let sh_lines          ?expect = sh_gen (Process.lines ())          ?expect
+let sh_full           ?expect = sh_gen  Process.content            ?expect
+let sh_full_and_error ?expect = sh_gen  Process.content_and_stderr ?expect
 
 let sh_lines_stream ?expect =
   Process.run_k (k_shell_command read_stream) ?expect
@@ -98,11 +106,15 @@ let ssh_gen reader ?ssh_options ?user ~host =
                    (fun f cmd -> In_thread.run (fun () -> f cmd reader))
                    ?ssh_options ?user ~host)
 
-let ssh       ?ssh_options = ssh_gen Process.discard ?ssh_options
-let ssh_one   ?ssh_options = ssh_gen (Process.head ()) ?ssh_options
-let ssh_one_exn   ?ssh_options = ssh_gen (Process.head_exn ()) ?ssh_options
-let ssh_lines ?ssh_options = ssh_gen (Process.lines ()) ?ssh_options
-let ssh_full  ?ssh_options = ssh_gen Process.content ?ssh_options
+let ssh                ?ssh_options = ssh_gen  Process.discard          ?ssh_options
+let ssh_one            ?ssh_options = ssh_gen (Process.head ())         ?ssh_options
+let ssh_one_exn        ?ssh_options = ssh_gen (Process.head_exn ())     ?ssh_options
+let ssh_first_line     ?ssh_options = ssh_gen (Process.head ())         ?ssh_options
+let ssh_first_line_exn ?ssh_options = ssh_gen (Process.head_exn ())     ?ssh_options
+let ssh_one_line       ?ssh_options = ssh_gen (Process.one_line ())     ?ssh_options
+let ssh_one_line_exn   ?ssh_options = ssh_gen (Process.one_line_exn ()) ?ssh_options
+let ssh_lines          ?ssh_options = ssh_gen (Process.lines ())        ?ssh_options
+let ssh_full           ?ssh_options = ssh_gen  Process.content          ?ssh_options
 
 let ssh_lines_stream ?ssh_options ?user ~host =
   Process.run_k (k_remote_command read_stream
