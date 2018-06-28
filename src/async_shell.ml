@@ -1,15 +1,14 @@
 open Core
 open Async
 
-module Shell = Core_extended.Shell
 module Process = Shell.Process
 
-type 'a with_process_flags = 'a Core_extended.Shell.with_process_flags
-type 'a with_run_flags     = 'a Core_extended.Shell.with_run_flags
-type 'a with_test_flags    = 'a Core_extended.Shell.with_test_flags
-type 'a with_ssh_flags     = 'a Core_extended.Shell.with_ssh_flags
-type 'a cmd                = 'a Core_extended.Shell.cmd
-type ('a,'ret) sh_cmd      = ('a,'ret) Core_extended.Shell.sh_cmd
+type 'a with_process_flags = 'a Shell.with_process_flags
+type 'a with_run_flags     = 'a Shell.with_run_flags
+type 'a with_test_flags    = 'a Shell.with_test_flags
+type 'a with_ssh_flags     = 'a Shell.with_ssh_flags
+type 'a cmd                = 'a Shell.cmd
+type ('a,'ret) sh_cmd      = ('a,'ret) Shell.sh_cmd
 
 let read_stream =
   let rev_concat xs = String.concat (List.rev xs) in

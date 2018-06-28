@@ -4,7 +4,7 @@
   (libraries (
     async
     core
-    core_extended
+    shell
   ))
   (preprocess (pps (ppx_jane ppxlib.runner)))
 ))
