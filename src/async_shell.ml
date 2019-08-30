@@ -106,15 +106,16 @@ let ssh_gen reader ?ssh_options ?user ~host =
                    (fun f cmd -> In_thread.run (fun () -> f cmd reader))
                    ?ssh_options ?user ~host)
 
-let ssh                ?ssh_options = ssh_gen  Process.discard          ?ssh_options
-let ssh_one            ?ssh_options = ssh_gen (Process.head ())         ?ssh_options
-let ssh_one_exn        ?ssh_options = ssh_gen (Process.head_exn ())     ?ssh_options
-let ssh_first_line     ?ssh_options = ssh_gen (Process.head ())         ?ssh_options
-let ssh_first_line_exn ?ssh_options = ssh_gen (Process.head_exn ())     ?ssh_options
-let ssh_one_line       ?ssh_options = ssh_gen (Process.one_line ())     ?ssh_options
-let ssh_one_line_exn   ?ssh_options = ssh_gen (Process.one_line_exn ()) ?ssh_options
-let ssh_lines          ?ssh_options = ssh_gen (Process.lines ())        ?ssh_options
-let ssh_full           ?ssh_options = ssh_gen  Process.content          ?ssh_options
+let ssh                ?ssh_options = ssh_gen  Process.discard            ?ssh_options
+let ssh_one            ?ssh_options = ssh_gen (Process.head ())           ?ssh_options
+let ssh_one_exn        ?ssh_options = ssh_gen (Process.head_exn ())       ?ssh_options
+let ssh_first_line     ?ssh_options = ssh_gen (Process.head ())           ?ssh_options
+let ssh_first_line_exn ?ssh_options = ssh_gen (Process.head_exn ())       ?ssh_options
+let ssh_one_line       ?ssh_options = ssh_gen (Process.one_line ())       ?ssh_options
+let ssh_one_line_exn   ?ssh_options = ssh_gen (Process.one_line_exn ())   ?ssh_options
+let ssh_lines          ?ssh_options = ssh_gen (Process.lines ())          ?ssh_options
+let ssh_full           ?ssh_options = ssh_gen  Process.content            ?ssh_options
+let ssh_full_and_error ?ssh_options = ssh_gen  Process.content_and_stderr ?ssh_options
 
 let ssh_lines_stream ?ssh_options ?user ~host =
   Process.run_k (k_remote_command read_stream
