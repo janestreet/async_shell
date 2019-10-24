@@ -15,7 +15,7 @@ depends: [
   "core"
   "ppx_jane"
   "shell"
-  "dune"     {build & >= "1.5.1"}
+  "dune"     {>= "1.5.1"}
 ]
 synopsis: "Shell helpers for Async"
 description: "
