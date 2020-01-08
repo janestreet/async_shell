@@ -1,7 +1,7 @@
 open! Core
 open! Async
 (** The functions in here are straightforward in_thread wrappers of
-    core_extended.Shell functions. *)
+    Shell (lib/shell/src/shell.mli) functions. *)
 
 module Process : sig
   type t = Shell.Process.t
