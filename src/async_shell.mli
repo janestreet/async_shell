@@ -1,7 +1,19 @@
 open! Core
 open! Async
 (** The functions in here are straightforward in_thread wrappers of
-    Shell (lib/shell/src/shell.mli) functions. *)
+    Shell (lib/shell/src/shell.mli) functions.
+
+    Child processes will not exit when the parent process exits. You can get this behavior
+    using [Async.Process]:
+
+    {[
+      let%bind background_process = Process.create_exn ~prog ~args () in
+      Shutdown.at_shutdown (fun () ->
+        Process.send_signal background_process Signal.term;
+        Deferred.unit);
+    ]}
+
+*)
 
 module Process : sig
   type t = Shell.Process.t
