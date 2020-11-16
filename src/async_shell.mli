@@ -32,11 +32,12 @@ type 'a with_process_flags = 'a Shell.with_process_flags
 type 'a with_run_flags     = 'a Shell.with_run_flags
 type 'a with_test_flags    = 'a Shell.with_test_flags
 type 'a with_ssh_flags     = 'a Shell.with_ssh_flags
+type 'a with_sh_flags      = 'a Shell.with_sh_flags
 type 'a cmd                = 'a Shell.cmd
 type ('a,'ret) sh_cmd      = ('a,'ret) Shell.sh_cmd
 
 val test     :      bool Deferred.t     cmd with_test_flags
-val sh_test  : ('a, bool Deferred.t) sh_cmd with_test_flags
+val sh_test  : ('a, bool Deferred.t) sh_cmd with_test_flags with_sh_flags
 val ssh_test : ('a, bool Deferred.t) sh_cmd with_test_flags with_ssh_flags
 
 val run                :              unit              Deferred.t cmd with_run_flags
@@ -55,21 +56,21 @@ val run_full           :              string            Deferred.t cmd with_run_
 val run_full_and_error :              (string * string) Deferred.t cmd with_run_flags
 val run_lines_stream   : string Stream.t                  cmd with_run_flags
 
-val sh                : ('a, unit              Deferred.t) sh_cmd with_run_flags
-val sh_lines          : ('a, string list       Deferred.t) sh_cmd with_run_flags
-val sh_one            : ('a, string option     Deferred.t) sh_cmd with_run_flags
+val sh                : ('a, unit              Deferred.t) sh_cmd with_run_flags with_sh_flags
+val sh_lines          : ('a, string list       Deferred.t) sh_cmd with_run_flags with_sh_flags
+val sh_one            : ('a, string option     Deferred.t) sh_cmd with_run_flags with_sh_flags
 [@@deprecated "[since 2017-11] Use [sh_one_line] to get a different behavior or \
                [sh_first_line] to get the old behavior"]
-val sh_one_exn        : ('a, string            Deferred.t) sh_cmd with_run_flags
+val sh_one_exn        : ('a, string            Deferred.t) sh_cmd with_run_flags with_sh_flags
 [@@deprecated "[since 2017-11] Use [sh_one_line_exn] to get a different behavior or \
                [sh_first_line_exn] to get the old behavior"]
-val sh_one_line       : ('a,string Or_error.t  Deferred.t) sh_cmd with_run_flags
-val sh_one_line_exn   : ('a,string             Deferred.t) sh_cmd with_run_flags
-val sh_first_line     : ('a,string option      Deferred.t) sh_cmd with_run_flags
-val sh_first_line_exn : ('a,string             Deferred.t) sh_cmd with_run_flags
-val sh_full           : ('a, string            Deferred.t) sh_cmd with_run_flags
-val sh_full_and_error : ('a, (string * string) Deferred.t) sh_cmd with_run_flags
-val sh_lines_stream   : ('a, string Stream.t)              sh_cmd with_run_flags
+val sh_one_line       : ('a,string Or_error.t  Deferred.t) sh_cmd with_run_flags with_sh_flags
+val sh_one_line_exn   : ('a,string             Deferred.t) sh_cmd with_run_flags with_sh_flags
+val sh_first_line     : ('a,string option      Deferred.t) sh_cmd with_run_flags with_sh_flags
+val sh_first_line_exn : ('a,string             Deferred.t) sh_cmd with_run_flags with_sh_flags
+val sh_full           : ('a, string            Deferred.t) sh_cmd with_run_flags with_sh_flags
+val sh_full_and_error : ('a, (string * string) Deferred.t) sh_cmd with_run_flags with_sh_flags
+val sh_lines_stream   : ('a, string Stream.t)              sh_cmd with_run_flags with_sh_flags
 
 val ssh                : ('a, unit              Deferred.t) sh_cmd with_run_flags with_ssh_flags
 val ssh_lines          : ('a, string list       Deferred.t) sh_cmd with_run_flags with_ssh_flags

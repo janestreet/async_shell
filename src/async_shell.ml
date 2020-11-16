@@ -8,6 +8,7 @@ type 'a with_process_flags = 'a Shell.with_process_flags
 type 'a with_run_flags     = 'a Shell.with_run_flags
 type 'a with_test_flags    = 'a Shell.with_test_flags
 type 'a with_ssh_flags     = 'a Shell.with_ssh_flags
+type 'a with_sh_flags      = 'a Shell.with_sh_flags
 type 'a cmd                = 'a Shell.cmd
 type ('a,'ret) sh_cmd      = ('a,'ret) Shell.sh_cmd
 
@@ -70,30 +71,30 @@ let test =
   Process.test_k (fun f prog args ->
     In_thread.run (fun () -> f (Process.cmd prog args)))
 
-let k_shell_command k f fmt =
-  ksprintf (fun command -> k f (Process.shell command)) fmt
+let k_shell_command k f ?strict_errors fmt =
+  ksprintf (fun command -> k f (Process.shell ?strict_errors command)) fmt
 
-let sh_gen reader =
-  Process.run_k (k_shell_command (fun f cmd ->
+let sh_gen ?strict_errors reader =
+  Process.run_k (k_shell_command ?strict_errors (fun f cmd ->
     In_thread.run (fun () -> f cmd reader)))
 
-let sh                ?expect = sh_gen  Process.discard            ?expect
-let sh_one            ?expect = sh_gen (Process.head ())           ?expect
-let sh_one_exn        ?expect = sh_gen (Process.head_exn ())       ?expect
-let sh_first_line     ?expect = sh_gen (Process.head ())           ?expect
-let sh_first_line_exn ?expect = sh_gen (Process.head_exn ())       ?expect
-let sh_one_line       ?expect = sh_gen (Process.one_line ())       ?expect
-let sh_one_line_exn   ?expect = sh_gen (Process.one_line_exn ())   ?expect
-let sh_lines          ?expect = sh_gen (Process.lines ())          ?expect
-let sh_full           ?expect = sh_gen  Process.content            ?expect
-let sh_full_and_error ?expect = sh_gen  Process.content_and_stderr ?expect
+let sh                ?strict_errors = sh_gen  Process.discard            ?strict_errors
+let sh_one            ?strict_errors = sh_gen (Process.head ())           ?strict_errors
+let sh_one_exn        ?strict_errors = sh_gen (Process.head_exn ())       ?strict_errors
+let sh_first_line     ?strict_errors = sh_gen (Process.head ())           ?strict_errors
+let sh_first_line_exn ?strict_errors = sh_gen (Process.head_exn ())       ?strict_errors
+let sh_one_line       ?strict_errors = sh_gen (Process.one_line ())       ?strict_errors
+let sh_one_line_exn   ?strict_errors = sh_gen (Process.one_line_exn ())   ?strict_errors
+let sh_lines          ?strict_errors = sh_gen (Process.lines ())          ?strict_errors
+let sh_full           ?strict_errors = sh_gen  Process.content            ?strict_errors
+let sh_full_and_error ?strict_errors = sh_gen  Process.content_and_stderr ?strict_errors
 
-let sh_lines_stream ?expect =
-  Process.run_k (k_shell_command read_stream) ?expect
+let sh_lines_stream ?strict_errors =
+  Process.run_k (k_shell_command read_stream) ?strict_errors
 
-let sh_test ?true_v =
-  Process.test_k (k_shell_command (fun f cmd ->
-    In_thread.run (fun () -> f cmd))) ?true_v
+let sh_test ?strict_errors =
+  Process.test_k (k_shell_command ?strict_errors (fun f cmd ->
+    In_thread.run (fun () -> f cmd)))
 
 let k_remote_command k f ?ssh_options ?user ~host fmt =
   ksprintf (fun command ->
