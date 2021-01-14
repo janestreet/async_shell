@@ -60,8 +60,6 @@ let run_one_line ?eol       = run_gen (Process.one_line     ?eol ())
 let run_one_line_exn ?eol   = run_gen (Process.one_line_exn ?eol ())
 let run_first_line ?eol     = run_gen (Process.head         ?eol ())
 let run_first_line_exn ?eol = run_gen (Process.head_exn     ?eol ())
-let run_one ?eol            = run_gen (Process.head         ?eol ())
-let run_one_exn ?eol        = run_gen (Process.head_exn     ?eol ())
 
 let run_lines_stream =
   Process.run_k (fun f prog args ->
@@ -79,8 +77,6 @@ let sh_gen ?strict_errors reader =
     In_thread.run (fun () -> f cmd reader)))
 
 let sh                ?strict_errors = sh_gen  Process.discard            ?strict_errors
-let sh_one            ?strict_errors = sh_gen (Process.head ())           ?strict_errors
-let sh_one_exn        ?strict_errors = sh_gen (Process.head_exn ())       ?strict_errors
 let sh_first_line     ?strict_errors = sh_gen (Process.head ())           ?strict_errors
 let sh_first_line_exn ?strict_errors = sh_gen (Process.head_exn ())       ?strict_errors
 let sh_one_line       ?strict_errors = sh_gen (Process.one_line ())       ?strict_errors
@@ -108,8 +104,6 @@ let ssh_gen reader ?ssh_options ?user ~host =
                    ?ssh_options ?user ~host)
 
 let ssh                ?ssh_options = ssh_gen  Process.discard            ?ssh_options
-let ssh_one            ?ssh_options = ssh_gen (Process.head ())           ?ssh_options
-let ssh_one_exn        ?ssh_options = ssh_gen (Process.head_exn ())       ?ssh_options
 let ssh_first_line     ?ssh_options = ssh_gen (Process.head ())           ?ssh_options
 let ssh_first_line_exn ?ssh_options = ssh_gen (Process.head_exn ())       ?ssh_options
 let ssh_one_line       ?ssh_options = ssh_gen (Process.one_line ())       ?ssh_options
