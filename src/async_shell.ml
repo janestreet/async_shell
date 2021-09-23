@@ -124,7 +124,7 @@ let ssh_test ?ssh_options ?user ~host =
 let mkdir ?p ?perm path =
   let p = Option.map p ~f:(fun () -> "-p") in
   let mode = Option.map perm ~f:(sprintf "--mode=%o") in
-  run "/bin/mkdir" (List.filter_map ~f:ident [p; mode; Some "--"; Some path])
+  run "/bin/mkdir" (List.filter_map ~f:Fn.id [p; mode; Some "--"; Some path])
 
 let scp ?(compress=false) ?(recurse=false) ?user ~host f t =
   let user_arg = Option.value_map user ~default:"" ~f:(fun user -> user ^ "@") in
