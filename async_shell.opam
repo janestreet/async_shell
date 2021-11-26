@@ -12,10 +12,10 @@ build: [
 depends: [
   "ocaml" {>= "4.08.0"}
   "async"
-  "core_kernel"
+  "core"
   "ppx_jane"
   "shell"
-  "dune"        {>= "2.0.0"}
+  "dune"     {>= "2.0.0"}
 ]
 synopsis: "Shell helpers for Async"
 description: "
