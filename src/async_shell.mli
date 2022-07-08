@@ -11,7 +11,7 @@ open! Async
 module Process : sig
   type t = Shell.Process.t
 
-  type status = [ `Timeout of Time.Span.t
+  type status = [ `Timeout of Time_float.Span.t
                 | `Exited of int
                 | `Signaled of Signal.t ]
 
