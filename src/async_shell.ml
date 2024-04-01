@@ -141,7 +141,7 @@ let ssh_test ?ssh_options ?user ~host =
 let mkdir ?p ?perm path =
   let p = Option.map p ~f:(fun () -> "-p") in
   let mode = Option.map perm ~f:(sprintf "--mode=%o") in
-  run "/bin/mkdir" (List.filter_map ~f:Fn.id [ p; mode; Some "--"; Some path ])
+  run "mkdir" (List.filter_map ~f:Fn.id [ p; mode; Some "--"; Some path ])
 ;;
 
 let scp ?(compress = false) ?(recurse = false) ?user ~host f t =
