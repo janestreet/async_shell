@@ -138,10 +138,12 @@ let ssh_test ?ssh_options ?user ~host =
        ~host)
 ;;
 
+let protect_path path = if String.is_prefix ~prefix:"-" path then "./" ^ path else path
+
 let mkdir ?p ?perm path =
   let p = Option.map p ~f:(fun () -> "-p") in
-  let mode = Option.map perm ~f:(sprintf "--mode=%o") in
-  run "mkdir" (List.filter_map ~f:Fn.id [ p; mode; Some "--"; Some path ])
+  let mode = Option.map perm ~f:(sprintf "-m=%o") in
+  run "mkdir" (List.filter_opt [ p; mode; Some (protect_path path) ])
 ;;
 
 let scp ?(compress = false) ?(recurse = false) ?user ~host f t =
