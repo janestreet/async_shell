@@ -15,7 +15,7 @@ depends: [
   "core"
   "ppx_jane"
   "shell"
-  "dune"     {>= "2.0.0"}
+  "dune"     {>= "3.11.0"}
 ]
 available: arch != "arm32" & arch != "x86_32"
 synopsis: "Shell helpers for Async"
