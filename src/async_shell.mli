@@ -2,17 +2,16 @@ open! Core
 open! Async
 
 (** WARNING: The use of this library in new projects is discouraged; consider using
-    [Async.Process] instead. This library has some gotchas, such as being unable
-    to return the full output of a command (see the [?tail_len] argument
-    to [Low_level_process.run]). *)
+    [Async.Process] instead. This library has some gotchas, such as being unable to return
+    the full output of a command (see the [?tail_len] argument to
+    [Low_level_process.run]). *)
 
-(** The functions in here are straightforward in_thread wrappers of
-    Shell (lib/shell/src/shell.mli) functions.
+(** The functions in here are straightforward in_thread wrappers of Shell
+    (lib/shell/src/shell.mli) functions.
 
-    Child processes will not exit when the parent process exits.
-    If you want the child processes to terminate, you need to arrange it explicitly,
-    e.g. by sending a signal, or closing a pipe, or sending an explicit message.
-*)
+    Child processes will not exit when the parent process exits. If you want the child
+    processes to terminate, you need to arrange it explicitly, e.g. by sending a signal,
+    or closing a pipe, or sending an explicit message. *)
 
 module Process : sig
   type t = Shell.Process.t
