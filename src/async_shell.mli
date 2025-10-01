@@ -28,6 +28,7 @@ module Process : sig
     ; stdout : string
     ; stderr : string
     }
+  [@@unsafe_allow_any_mode_crossing]
 
   exception Failed of result
 
