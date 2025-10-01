@@ -14,7 +14,7 @@ open! Async
     or closing a pipe, or sending an explicit message. *)
 
 module Process : sig
-  type t = Shell.Process.t
+  type t : immutable_data = Shell.Process.t
 
   type status =
     [ `Timeout of Time_float.Span.t
@@ -22,12 +22,13 @@ module Process : sig
     | `Signaled of Signal.t
     ]
 
-  type result = Shell.Process.result =
+  type result : immutable_data = Shell.Process.result =
     { command : t
     ; status : status
     ; stdout : string
     ; stderr : string
     }
+  [@@unsafe_allow_any_mode_crossing]
 
   exception Failed of result
 
